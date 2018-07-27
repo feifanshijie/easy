@@ -3,7 +3,7 @@
  * Explain 全局静态变量
  */
 
-define('ENVIRONMENT', gethostbyaddr($_SERVER['REMOTE_ADDR']));                       //获取当前环境
+define('ENVIRONMENT', 'localhost');                       //获取当前环境
 define('BASE_PATH', '../'.dirname(__FILE__));                                   //根目录
 define('F', 'FactoryLib/');
 define('CONFIG_PATH', '../Config/'.ENVIRONMENT);                                     //配置文件目录

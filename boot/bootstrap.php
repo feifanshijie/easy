@@ -19,8 +19,8 @@ $query_string = $_SERVER['QUERY_STRING'] ?? '';
 $query_url = $_SERVER['REQUEST_URI'] ?? '';
 $rout = str_replace('?'.$query_string,'',$query_url);
 
-require '../boot/param.php';              //加载全局静态变量
-require '../boot/func.php';           //加载全局帮助函数
+require '../boot/param.php';               //加载全局静态变量
+require '../boot/func.php';                //加载全局帮助函数
 require '../boot/service.php';             //加载全局服务
 require '../boot/register.php';            //注册全局服务
 require __DIR__.'/../vendor/autoload.php'; //composer自动载入
@@ -30,6 +30,5 @@ if(!empty(ROUTE[$rout]))
 {
     $app = new Application($rout);
     $response = $app->run();
-
     echo is_array($response) ? json_encode($response) : $response;
 }

@@ -22,12 +22,23 @@ class Application
      */
     public function __construct(string $path = '/')
     {
+        self::header();
         $info = explode('@', ROUTE[$path]);
         $this->_action = '\\App\\'.CONFIG['app']['action'].'\\'.$info[1];
         $this->_function = $info[2];
         $this->_app = explode(':', ROUTE[$path]);
     }
 
+    public function header()
+    {
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin:*");
+        header("Access-Control-Allow-Headers:content-type,authorization");
+        header("Access-Control-Request-Method:GET,POST,OPTIONS");
+        header('charset=utf-8');
+        header("X-Powered-By: FunnyPHP");
+        ini_set('date.timezone', 'Asia/Shanghai');
+    }
     /**
      * 运行验证请求方法
      */

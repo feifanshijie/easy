@@ -6,8 +6,6 @@ if (!function_exists('env'))
     function env($param)
     {
         $re = explode('.', $param);
-        var_dump($re);exit;
-        CONFIG[$param];
     }
 }
 

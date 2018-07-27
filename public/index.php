@@ -1,19 +1,3 @@
 <?php
-/**
- * 是否开启DEBUG
- */
-if(CONFIG['app']['debug'] == true)
-{
-    $rp = E_ALL;
-    $e2 = 'On';
-}
-else
-{
-    $rp = 0;
-    $e2 = 'Off';
-}
-
-error_reporting($rp);
-ini_set('display_errors',$e2);
-
-require_once '../boot/bootstrap.php';
+version_compare(PHP_VERSION, '7.0') < 0 && die('PHP版本小于7.0,请升级PHP版本');
+require '../boot/bootstrap.php';

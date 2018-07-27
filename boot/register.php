@@ -1,5 +1,21 @@
 <?php
 /**
+ * 是否开启DEBUG
+ */
+if(CONFIG['app']['debug'] == true)
+{
+    error_reporting(E_ALL);
+    $e2 = 'On';
+}
+else
+{
+    error_reporting(0);
+    $e2 = 'Off';
+}
+
+ini_set('display_errors',$e2);
+
+/**
  * 自动加载
  */
 spl_autoload_register(function ($class) {
