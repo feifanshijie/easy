@@ -2,23 +2,25 @@
 
 namespace App\Action;
 
-use App\Model\Article;
-use App\Model\Book;
+use App\Model\Asset;
 use Boot\Support\Action;
 
 class IndexAction extends Action
 {
     public function index()
     {
-        $data = Book::query()->get();
-        return msg(200, 'success', $data);
-    }
+        Asset::query()->insert([
+            'category_id' => 1,
+            'name' => 2,
+            'location' => 3,
+            'status' => 4
+        ]);
 
-    public function test()
-    {
-        $data['title'] = '测试DEMO';
-        $data['list']  = Article::query()
-            ->select(['id', 'title', 'info', 'pv', 'like'])
+        $paging = $this->service->paginate();
+
+        $data['list'] = Asset::query()
+            ->offset($paging->offset)
+            ->limit($paging->limit)
             ->get();
 
         return msg(200, 'success', $data);

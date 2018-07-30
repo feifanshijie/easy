@@ -1,10 +1,7 @@
 <?php
-
-/**
- * TODO:路由器
- */
 return
 [
-    '/'       => 'GET@IndexAction@index',
-    '/detail' => 'GET@IndexAction@view',
+    '/'               => 'GET@IndexAction@index',
+    '/detail'         => 'GET@Front\IndexAction@view',
+    "/admin/manage"   => 'GET@Front\IndexAction@view',
 ];

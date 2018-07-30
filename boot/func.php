@@ -9,6 +9,24 @@ if (!function_exists('env'))
     }
 }
 
+if (!function_exists('request'))
+{
+    function request($name = null, $default = null)
+    {
+        if(isset($_GET[$name]))
+        {
+            return $_GET[$name];
+        }
+
+        if(isset($_POST[$name]))
+        {
+            return $_POST[$name];
+        }
+
+        return $default;
+    }
+}
+
 /**
  * TODO:CURL
  * @param  string $url  地址
