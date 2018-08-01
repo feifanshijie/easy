@@ -1,3 +1,18 @@
-
 .idea/*
 config/localhost/app.ini
+composer.lock
+storage/
+Would skip repository vendor/eaglewu/swoole-ide-helper
+vendor/autoload.php
+vendor/bin
+vendor/composer
+vendor/predis
+vendor/wy0727
+vendor/nesbot
+vendor/fzaninotto
+vendor/doctrine
+vendor/qiniu
+vendor/psr
+vendor/symfony
+vendor/illuminate
+vendor/Tool
