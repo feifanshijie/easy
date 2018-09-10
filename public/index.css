@@ -18,8 +18,21 @@ body{
 }
 
 .article-list{
+    margin-right: 20px;
     padding: 20px 20px 0 20px;
+    border: 1px solid #ddd;
 }
+
+.article-content{
+    margin-right: 20px;
+    padding: 20px 20px 0 20px;
+    border: 1px solid #ddd;
+}
+
+
+
+
+
 .article-item{
     padding-bottom: 15px;
     margin-bottom: 15px;
@@ -51,9 +64,14 @@ body{
 
 /*右侧分类*/
 .article-category{
-
+    margin-bottom: 8px;
 }
 
 .article-category-name{
     color:#499ef3;
+}
+
+.article-category-info{
+    font-size: 0.8rem !important;
+    color: #999;
 }

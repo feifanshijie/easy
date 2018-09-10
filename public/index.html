@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>树洞</title>
     <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="index.css" rel="stylesheet">
+    <link href="index.css?1=1" rel="stylesheet">
     <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.min.js"></script>
     <script src="https://cdn.bootcss.com/axios/0.18.0/axios.min.js"></script>
     <script src="service.js"></script>
@@ -18,19 +18,68 @@
             url('//at.alicdn.com/t/font_830421_j8ju6nuyad.svg#iconfont') format('svg');
         }
     </style>
-
+    <script>
+        window.onload = function(){
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    article: [],
+                    category:[],
+                    isShowList: true,
+                    isShowContent: false,
+                    content: ''
+                },
+                mounted:function(){
+                    var that = this;
+                    axios.get(server,{
+                        params:{
+                            page:page
+                        }
+                    })
+                        .then(function(response){
+                            that.article = response.data.data
+                            console.log(response.data.data);
+                        })
+                        .catch(function(err){
+                            console.log(err);
+                        });
+                },
+                methods:{
+                    init:function(){
+                        var that = this;
+                        axios.get(server,{
+                            params:{
+                                page:page
+                            }
+                        })
+                            .then(function(response){
+                                that.article = response.data.data.list;
+                                that.category = response.data.data.category;
+                            })
+                            .catch(function(err){
+                                console.log(err);
+                            });
+                    },
+                    brew:function () {
+                        this.isShowList = false;
+                        this.isShowContent = true;
+                    }
+                }
+            });
+        }
+    </script>
 </head>
 <body>
 <div id="app">
     <div class="container">
         <div class="container-fluid" id="main">
             <div class="row">
-                <div class="col block article-list " style="border: 1px solid #ddd;margin-right: 20px">
+                <div class="col block article-list" v-show="isShowList">
 
-                    <div class="row article-item" v-for="v in article">
+                    <div class="row article-item" v-for="v in article['list']">
                         <div class="col col-lg-7">
-                            <a href="#" class="article-name">{{ v.name }}</a>
-                            <div class="article-statistics"> • fanta	回复了问题 • 2 人关注 • 1 个回复 • 62 次浏览 • 13 小时前 </div>
+                            <a href="javascript:;" v-on:click="brew()" class="article-name">{{ v.title }}</a>
+                            <div class="article-statistics"> • {{ v.follow_num }} 人觉得很赞 • {{ v.reply_num }} 个回复 • {{v.pv}} 次浏览 • 13 小时前 </div>
                         </div>
                         <div class="col col-lg-3">
                             <div>
@@ -39,7 +88,6 @@
                                 <span class="badge badge-info">MySQL</span>
                                 <span class="badge badge-success">运维</span>
                                 <span class="badge badge-primary">Gin</span>
-                                <span class="badge badge-primary">2</span>
                             </div>
                         </div>
                         <div class="col col-lg-2">
@@ -58,16 +106,20 @@
                             <li class="page-item"><a class="page-link" href="#">1</a></li>
                             <li class="page-item"><a class="page-link" href="#">2</a></li>
                             <li class="page-item">
-                                <a class="page-link" href="#">Next</a>
+                                <a class="page-link" href="#">下一页</a>
                             </li>
                         </ul>
                     </nav>
                 </div>
+
+                <div class="col block article-content" v-show="isShowContent">
+                </div>
+
                 <div class="col col-lg-2">
                     <div class="row block" style="padding: 10px">
-                        <div class="article-category">
-                            <a href="" class="article-category-name">PHP</a>
-                            <div style="color:#999;font-size: 0.7rem"><strong>38 个文章, 49 次赞同</strong></div>
+                        <div class="article-category" v-for="v in article['category']">
+                            <a href="" class="article-category-name">{{ v.name }}</a>
+                            <div class="article-category-info">{{ v.num }} 个文章, {{ v.like_num }} 次赞同</div>
                         </div>
                     </div>
                     <div class="row">
@@ -78,45 +130,6 @@
         </div>
     </div>
 </div>
-<script>
-var app = new Vue({
-    el: '#app',
-    data: {
-        article: []
-    },
-    mounted:function(){
-        var that = this;
-        axios.get(server,{
-            params:{
-                page:page
-            }
-        })
-        .then(function(response){
-            that.article = response.data.data
-            console.log(response.data.data);
-        })
-        .catch(function(err){
-            console.log(err);
-        });
-    },
-    method:{
-        init:function(){
-            var that = this;
-            axios.get(server,{
-                params:{
-                    page:page
-                }
-            })
-            .then(function(response){
-                that.article = response.data.data
-                console.log(response.data.data);
-            })
-            .catch(function(err){
-                console.log(err);
-            });
-        }
-    }
-});
-</script>
+
 </body>
 </html>
