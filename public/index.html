@@ -2,19 +2,121 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>欢迎</title>
-    <link rel="stylesheet" href="./res/public.css">
-    <link rel="stylesheet" href="./res/index.css">
+    <title>树洞</title>
     <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap-grid.min.css" rel="stylesheet">
-    <script src="https://cdn.bootcss.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <link href="index.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.min.js"></script>
+    <script src="https://cdn.bootcss.com/axios/0.18.0/axios.min.js"></script>
+    <script src="service.js"></script>
+    <style>
+        @font-face {
+            font-family: 'iconfont';  /* project id 830421 */
+            src: url('//at.alicdn.com/t/font_830421_j8ju6nuyad.eot');
+            src: url('//at.alicdn.com/t/font_830421_j8ju6nuyad.eot?#iefix') format('embedded-opentype'),
+            url('//at.alicdn.com/t/font_830421_j8ju6nuyad.woff') format('woff'),
+            url('//at.alicdn.com/t/font_830421_j8ju6nuyad.ttf') format('truetype'),
+            url('//at.alicdn.com/t/font_830421_j8ju6nuyad.svg#iconfont') format('svg');
+        }
+    </style>
+
 </head>
 <body>
-    <div>
-        123
+<div id="app">
+    <div class="container">
+        <div class="container-fluid" id="main">
+            <div class="row">
+                <div class="col block article-list " style="border: 1px solid #ddd;margin-right: 20px">
+
+                    <div class="row article-item" v-for="v in article">
+                        <div class="col col-lg-7">
+                            <a href="#" class="article-name">{{ v.name }}</a>
+                            <div class="article-statistics"> • fanta	回复了问题 • 2 人关注 • 1 个回复 • 62 次浏览 • 13 小时前 </div>
+                        </div>
+                        <div class="col col-lg-3">
+                            <div>
+                                <span class="badge badge-secondary">Golang</span>
+                                <span class="badge badge-warning"></span>
+                                <span class="badge badge-info">MySQL</span>
+                                <span class="badge badge-success">运维</span>
+                                <span class="badge badge-primary">Gin</span>
+                                <span class="badge badge-primary">2</span>
+                            </div>
+                        </div>
+                        <div class="col col-lg-2">
+                            <img class="contribution-avatar" src="http://cdnlab.hzhui.com/image/2017/08/01/aHR0cDovL3d4LnFsb2dv18429.jpg">
+                            <img class="contribution-avatar" src="http://cdnlab.hzhui.com/image/2017/08/01/aHR0cDovL3d4LnFsb2dv18429.jpg">
+                            <img class="contribution-avatar" src="http://cdnlab.hzhui.com/image/2017/08/01/aHR0cDovL3d4LnFsb2dv18429.jpg">
+                            <img class="contribution-avatar" src="http://cdnlab.hzhui.com/image/2017/08/01/aHR0cDovL3d4LnFsb2dv18429.jpg">
+                        </div>
+                    </div>
+
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-end">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1">上一页</a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col col-lg-2">
+                    <div class="row block" style="padding: 10px">
+                        <div class="article-category">
+                            <a href="" class="article-category-name">PHP</a>
+                            <div style="color:#999;font-size: 0.7rem"><strong>38 个文章, 49 次赞同</strong></div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-<div>
-    123
 </div>
+<script>
+var app = new Vue({
+    el: '#app',
+    data: {
+        article: []
+    },
+    mounted:function(){
+        var that = this;
+        axios.get(server,{
+            params:{
+                page:page
+            }
+        })
+        .then(function(response){
+            that.article = response.data.data
+            console.log(response.data.data);
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+    },
+    method:{
+        init:function(){
+            var that = this;
+            axios.get(server,{
+                params:{
+                    page:page
+                }
+            })
+            .then(function(response){
+                that.article = response.data.data
+                console.log(response.data.data);
+            })
+            .catch(function(err){
+                console.log(err);
+            });
+        }
+    }
+});
+</script>
 </body>
 </html>
