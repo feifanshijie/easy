@@ -17,7 +17,7 @@ class Blog extends Model
 
     public function label()
     {
-        return $this->hasMany('App\Model\BlogLabel', 'blog_id', 'id')->leftJoin('label', 'label.id', 'blog_label.label_id');
+        return $this->hasMany('App\Model\BlogLabel', 'blog_id', 'id')->leftJoin('');
     }
 }
 

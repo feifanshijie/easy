@@ -10,11 +10,12 @@ class IndexAction extends Action
 {
     public function index()
     {
-        $list = Blog::query()->get();
+        $list = Blog::query()->with('label')->get();
 
         $data['list'] = $list;
-        $data['category'] = BlogCategory::query()->get();
-
+        $data['category'] = BlogCategory::query()->limit(6)->get();
+        $data['hot'] = '热议';
+        $data['statistics'] = '';
 
         return msg(200, 'success', $data);
     }

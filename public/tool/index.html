@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>工具</title>
+    <script src="fu.js"></script>
+    <style>
+        .container{
+            width: 1200px;
+            padding: 20px;
+            margin: 50px auto;
+            border:1px solid #ddd;
+        }
+        .block{
+            border-bottom: 1px solid #ddd
+        }
+
+        .button{
+            display: inline-block;
+            width: 170px;
+            height: 25px;
+            margin: 5px 5px;
+            border: 1px solid #ddd;
+            text-decoration-line: none;
+            color:darkred;
+            text-align: center;
+            line-height: 25px;
+        }
+        .button:hover{
+            background-color: darkred;
+            color: #ddd;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="block">
+        <p>
+            IP:&nbsp;&nbsp;<span id="ip"></span>&nbsp;&nbsp;
+            地址:&nbsp;&nbsp;<span id="address"></span>&nbsp;&nbsp;
+            邮编:&nbsp;&nbsp;<span id="post_code"></span>&nbsp;&nbsp;
+            其他:&nbsp;&nbsp;<span id="system"></span>&nbsp;&nbsp;
+        </p>
+    </div>
+    <div class="block">
+        <p>工具</p>
+        <p class="lead">
+            <a class="button" href="http://www.bejson.com/">bejson</a>
+            <a class="button" href="http://cal.apple886.com/">计算器</a>
+            <a class="button" href="http://www.cmd5.com/">md5加密解密</a>
+            <a class="button" href="http://www.bejson.com/othertools/keycodes/">keycode对照表</a>
+            <a class="button" href="http://www.bejson.com/httputil/clientinfo/">获取系统信息</a>
+            <a class="button" href="http://www.bejson.com/httputil/websocket/">websocket模拟</a>
+        </p>
+    </div>
+
+    <div class="block">
+        <p>社区</p>
+        <p class="lead">
+            <a class="button" href="https://github.com">github</a>
+            <a class="button" href="https://www.stackoverflow.com">Stack Overflow</a>
+            <a class="button" href="https://segmentfault.com">SegmentFault</a>
+            <a class="button" href="https://www.oschina.net">oschina</a>
+            <a class="button" href="https://gitee.com">码云</a>
+            <a class="button" href="https://www.cnblogs.com">博客园</a>
+            <a class="button" href="https://www.bootcdn.cn">前端CDN</a>
+        </p>
+    </div>
+
+    <div class="block">
+        <p>第三方服务</p>
+        <p class="lead">
+            <a class="button" href="https://github.com">极光</a>
+            <a class="button" href="https://www.bootcdn.cn">个推</a>
+            <a class="button" href="https://www.qiniu.com">七牛云</a>
+            <a class="button" href="https://www.aliyun.com">阿里云</a>
+            <a class="button" href="https://www.aliyun.com">腾讯云</a>
+        </p>
+    </div>
+
+    <div class="block">
+        <p>腾讯</p>
+        <p class="lead">
+            <a class="button" href="https://open.weixin.qq.com">微信开放平台</a>
+            <a class="button" href="https://mp.weixin.qq.com">微信公众平台</a>
+        </p>
+    </div>
+
+    <div class="block">
+        <p>在线手册</p>
+        <p>
+            <a class="button" href="https://www.bt.cn">宝塔</a>
+            <a class="button" href="https://www.bt.cn/btcode.html">宝塔命令大全</a>
+            <a class="button" href="https://v4.bootcss.com/">bootstrap</a>
+            <a class="button" href="https://cloud.tencent.com/developer/devdocs">腾讯在线手册大全</a>
+        </p>
+    </div>
+
+    <div class="block">
+        <p>在线书籍</p>
+        <p>
+            <a class="button" href="https://books.studygolang.com/gopl-zh/">《Go语言圣经》</a>
+        </p>
+    </div>
+</div>
+<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+
+<script>
+    document.getElementById('ip').innerHTML = returnCitySN.cip;
+    document.getElementById('address').innerHTML = returnCitySN.cname;
+    document.getElementById('post_code').innerHTML = returnCitySN.cid;
+    document.getElementById('system').innerHTML = navigator.platform + navigator.appName + navigator.appVersion + window.screen.height + window.screen.width + window.screen.colorDepth + navigator.appCodeName + navigator.userAgent + navigator.onLine + navigator.language + navigator.product + navigator.productSub + navigator.cookieEnabled + navigator.mimeTypes.length + navigator.mimeTypes + navigator.plugins.length + navigator.plugins;
+
+    var Ajax={
+        get: function(url, fn) {
+            // XMLHttpRequest对象用于在后台与服务器交换数据
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.onreadystatechange = function() {
+                // readyState == 4说明请求已完成
+                if (xhr.readyState == 4 && xhr.status == 200 || xhr.status == 304) {
+                    // 从服务器获得数据
+                    fn.call(this, xhr.responseText);
+                }
+            };
+            xhr.send();
+        },
+        // datat应为'a=a1&b=b1'这种字符串格式，在jq里如果data为对象会自动将对象转成这种字符串格式
+        post: function (url, data, fn) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", url, true);
+            // 添加http头，发送信息至服务器时内容编码类型
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 304)) {
+                    fn.call(this, xhr.responseText);
+                }
+            };
+            xhr.send(data);
+        }
+    };
+
+</script>
+</body>
+</html>

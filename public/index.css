@@ -6,6 +6,10 @@ body{
 .block{
     background-color: #fff;
 }
+.right-block{
+    padding: 10px;
+    margin-bottom: 10px;border: 1px solid #ddd;
+}
 
 #main{
     margin-top: 100px;
@@ -28,10 +32,6 @@ body{
     padding: 20px 20px 0 20px;
     border: 1px solid #ddd;
 }
-
-
-
-
 
 .article-item{
     padding-bottom: 15px;
@@ -60,10 +60,9 @@ body{
 
 }
 
-
-
-/*右侧分类*/
+/*右侧主题分类*/
 .article-category{
+    width: 100%;
     margin-bottom: 8px;
 }
 
@@ -74,4 +73,68 @@ body{
 .article-category-info{
     font-size: 0.8rem !important;
     color: #999;
+}
+
+/**
+ * 社区运行状况
+ */
+.statistics{
+    width: 100%;
+    padding: 5px 0;
+    margin-bottom: 5px;
+    color:#ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+.statistics-item{
+    width: 100%;
+}
+
+.statistics-register{
+
+}
+
+.statistics-thread{
+
+}
+
+.statistics-reply{
+
+}
+
+/**
+ * 热门
+ */
+.hot{
+    width: 100%;
+    margin-bottom: 10px;
+    color:#aaa;
+    padding-bottom: 8px;
+    border-bottom:1px solid #ddd;
+}
+
+.hot-item{
+    margin-bottom: 10px
+}
+
+.hot-item:last-child{
+    margin-bottom: 0;
+}
+
+.hot-title{
+    float: left;
+    width: 200px;
+    height: 30px;
+    line-height: 12px;
+}
+
+.hot-title a{
+    color:#499ef3;
+    font-size: 0.8rem;
+    text-decoration-line:none;
+}
+
+.hot-avatar{
+    width: 30px;
+    height: 30px;
 }

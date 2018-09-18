@@ -75,7 +75,6 @@
         <div class="container-fluid" id="main">
             <div class="row">
                 <div class="col block article-list" v-show="isShowList">
-
                     <div class="row article-item" v-for="v in article['list']">
                         <div class="col col-lg-7">
                             <a href="javascript:;" v-on:click="brew()" class="article-name">{{ v.title }}</a>
@@ -115,16 +114,38 @@
                 <div class="col block article-content" v-show="isShowContent">
                 </div>
 
-                <div class="col col-lg-2">
-                    <div class="row block" style="padding: 10px">
+                <div class="col col-lg-3">
+                    <div class="row block right-block">
+                        <div class="statistics">
+                            当前
+                        </div>
+                        <div class="statistics-item"><a href="" class="statistics-register">会员</a>&nbsp;&nbsp;<strong>350373</strong></div>
+                        <div class="statistics-item"><a href="" class="statistics-thread">主题</a>&nbsp;&nbsp;<strong>490482</strong></div>
+                        <div class="statistics-item"><a href="" class="statistics-reply">回复</a>&nbsp;&nbsp;<strong>6189763</strong></div>
+                    </div>
+                    <div class="row block right-block">
+                        <div class="hot">
+                            热门
+                        </div>
+                        <div class="hot-item" v-for="v in article['category']">
+                            <div style="width: 40px;float: left">
+                                <a href="" ><img class="hot-avatar" src="http://cdnlab.hzhui.com/image/2017/08/17/aHR0cDovL3d4LnFsb2dv11911.jpg"></a>
+                            </div>
+                            <div class="hot-title">
+                                <a href="" >回顾一下自己北漂回西安来这半年情况</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row block right-block">
+                        广告预留
+                    </div>
+                    <div class="row block right-block">
                         <div class="article-category" v-for="v in article['category']">
                             <a href="" class="article-category-name">{{ v.name }}</a>
                             <div class="article-category-info">{{ v.num }} 个文章, {{ v.like_num }} 次赞同</div>
                         </div>
                     </div>
-                    <div class="row">
 
-                    </div>
                 </div>
             </div>
         </div>
