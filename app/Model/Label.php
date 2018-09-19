@@ -7,17 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property int $id
  */
-class Blog extends Model
+class Label extends Model
 {
     protected $primaryKey = 'id';
 
-    protected $table = 'blog';
+    protected $table = 'label';
 
     public $timestamps = false;
 
     public function label()
     {
-        return $this->hasMany('App\Model\BlogLabel', 'blog_id', 'id')->leftJoin('');
+//        return $this->hasMany('App\Model\BlogLabel', 'blog_id', 'id')->leftJoin('');
     }
 }
 

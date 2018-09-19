@@ -10,7 +10,16 @@ class IndexAction extends Action
 {
     public function index()
     {
-        $list = Blog::query()->with('label')->get();
+        $list = Blog::query()
+            ->with(['label' => function($query){
+                $query->leftJoin('label', 'label.id', 'blog_label.label_id')
+                    ->select('label.id', 'blog_label.blog_id', 'label.name');
+            }])
+            ->with(['reply_user' => function($query){
+                $query->leftJoin('user', 'user.id', 'blog_reply.user_id')
+                    ->select('user.nickname', 'user.avatar', 'blog_reply.blog_id');
+            }])
+            ->get();
 
         $data['list'] = $list;
         $data['category'] = BlogCategory::query()->limit(6)->get();

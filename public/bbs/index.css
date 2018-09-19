@@ -1,18 +1,30 @@
 *{margin:0;padding:0}
 body{
-    background-color: #efefef;
+    background-color: #fff;
 }
 
+/**
+ * 公共部分
+ */
 .block{
     background-color: #fff;
 }
 .right-block{
     padding: 10px;
     margin-bottom: 10px;border: 1px solid #ddd;
+    background-color: #fff;
+}
+/*右侧标题*/
+.right-label-title{
+    width: 100%;
+    margin-bottom: 10px;
+    color:#aaa;
+    padding-bottom: 8px;
+    border-bottom:1px solid #ddd;
 }
 
 #main{
-    margin-top: 100px;
+    margin-top: 20px;
 }
 #left{
 
@@ -31,6 +43,9 @@ body{
     margin-right: 20px;
     padding: 20px 20px 0 20px;
     border: 1px solid #ddd;
+}
+.article-label{
+    margin-right: 5px;
 }
 
 .article-item{
@@ -79,11 +94,7 @@ body{
  * 社区运行状况
  */
 .statistics{
-    width: 100%;
-    padding: 5px 0;
-    margin-bottom: 5px;
-    color:#ddd;
-    border-bottom: 1px solid #ddd;
+
 }
 
 .statistics-item{
@@ -106,11 +117,7 @@ body{
  * 热门
  */
 .hot{
-    width: 100%;
-    margin-bottom: 10px;
-    color:#aaa;
-    padding-bottom: 8px;
-    border-bottom:1px solid #ddd;
+
 }
 
 .hot-item{

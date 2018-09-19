@@ -1,21 +1,16 @@
 {
     "name": "change/php",
-    "description": "php is the base program language",
+    "description": "1111",
     "keywords": ["php", "api", "bast"],
     "license": "MIT",
     "type": "project",
     "require": {
         "php": ">=5.6.4",
         "qiniu/php-sdk": "^7.1",
-        "wy0727/getui": "^0.1.0",
         "illuminate/database": "^5.4",
         "illuminate/events": "^5.4",
         "predis/predis": "^1.1",
         "doctrine/dbal": "^2.8"
-    },
-    "require-dev": {
-        "fzaninotto/faker": "~1.4",
-        "eaglewu/swoole-ide-helper": "dev-master"
     },
     "autoload": {
         "classmap": [

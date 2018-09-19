@@ -5,12 +5,15 @@
     <title>树洞</title>
     <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="index.css?1=1" rel="stylesheet">
+    <link href="header.css?1=1" rel="stylesheet">
+    <link href="footer.css?1=1" rel="stylesheet">
     <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.min.js"></script>
     <script src="https://cdn.bootcss.com/axios/0.18.0/axios.min.js"></script>
     <script src="service.js"></script>
+    <script src="index.js"></script>
     <style>
         @font-face {
-            font-family: 'iconfont';  /* project id 830421 */
+            font-family: 'iconfont';
             src: url('//at.alicdn.com/t/font_830421_j8ju6nuyad.eot');
             src: url('//at.alicdn.com/t/font_830421_j8ju6nuyad.eot?#iefix') format('embedded-opentype'),
             url('//at.alicdn.com/t/font_830421_j8ju6nuyad.woff') format('woff'),
@@ -18,59 +21,17 @@
             url('//at.alicdn.com/t/font_830421_j8ju6nuyad.svg#iconfont') format('svg');
         }
     </style>
-    <script>
-        window.onload = function(){
-            var app = new Vue({
-                el: '#app',
-                data: {
-                    article: [],
-                    category:[],
-                    isShowList: true,
-                    isShowContent: false,
-                    content: ''
-                },
-                mounted:function(){
-                    var that = this;
-                    axios.get(server,{
-                        params:{
-                            page:page
-                        }
-                    })
-                        .then(function(response){
-                            that.article = response.data.data
-                            console.log(response.data.data);
-                        })
-                        .catch(function(err){
-                            console.log(err);
-                        });
-                },
-                methods:{
-                    init:function(){
-                        var that = this;
-                        axios.get(server,{
-                            params:{
-                                page:page
-                            }
-                        })
-                            .then(function(response){
-                                that.article = response.data.data.list;
-                                that.category = response.data.data.category;
-                            })
-                            .catch(function(err){
-                                console.log(err);
-                            });
-                    },
-                    brew:function () {
-                        this.isShowList = false;
-                        this.isShowContent = true;
-                    }
-                }
-            });
-        }
-    </script>
 </head>
 <body>
 <div id="app">
+    <div id="header" class="container-fluid">
+        <div class="container">
+            <a class="header-nav-link header-nav-link-cur" href="#">首页</a>
+            <a class="header-nav-link" href="#">话题</a>
+            <a class="header-nav-link" href="#">社群</a>
+            <a class="header-nav-link" href="#">求助</a>
+        </div>
+    </div>
     <div class="container">
         <div class="container-fluid" id="main">
             <div class="row">
@@ -81,19 +42,10 @@
                             <div class="article-statistics"> • {{ v.follow_num }} 人觉得很赞 • {{ v.reply_num }} 个回复 • {{v.pv}} 次浏览 • 13 小时前 </div>
                         </div>
                         <div class="col col-lg-3">
-                            <div>
-                                <span class="badge badge-secondary">Golang</span>
-                                <span class="badge badge-warning"></span>
-                                <span class="badge badge-info">MySQL</span>
-                                <span class="badge badge-success">运维</span>
-                                <span class="badge badge-primary">Gin</span>
-                            </div>
+                            <span v-for="(item, key) in v.label" :class="setLabel(key)">{{ item.name }}</span>
                         </div>
                         <div class="col col-lg-2">
-                            <img class="contribution-avatar" src="http://cdnlab.hzhui.com/image/2017/08/01/aHR0cDovL3d4LnFsb2dv18429.jpg">
-                            <img class="contribution-avatar" src="http://cdnlab.hzhui.com/image/2017/08/01/aHR0cDovL3d4LnFsb2dv18429.jpg">
-                            <img class="contribution-avatar" src="http://cdnlab.hzhui.com/image/2017/08/01/aHR0cDovL3d4LnFsb2dv18429.jpg">
-                            <img class="contribution-avatar" src="http://cdnlab.hzhui.com/image/2017/08/01/aHR0cDovL3d4LnFsb2dv18429.jpg">
+                            <img v-for="item in v.reply_user" class="contribution-avatar" :src="item.avatar">
                         </div>
                     </div>
 
@@ -116,15 +68,15 @@
 
                 <div class="col col-lg-3">
                     <div class="row block right-block">
-                        <div class="statistics">
+                        <div class="right-label-title statistics">
                             当前
                         </div>
                         <div class="statistics-item"><a href="" class="statistics-register">会员</a>&nbsp;&nbsp;<strong>350373</strong></div>
                         <div class="statistics-item"><a href="" class="statistics-thread">主题</a>&nbsp;&nbsp;<strong>490482</strong></div>
                         <div class="statistics-item"><a href="" class="statistics-reply">回复</a>&nbsp;&nbsp;<strong>6189763</strong></div>
                     </div>
-                    <div class="row block right-block">
-                        <div class="hot">
+                    <div class="row right-block">
+                        <div class="right-label-title hot">
                             热门
                         </div>
                         <div class="hot-item" v-for="v in article['category']">
@@ -136,21 +88,59 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row block right-block">
-                        广告预留
+                    <div class="row right-block">
+                        <div class="right-label-title ad">
+                            广告预留
+                        </div>
                     </div>
-                    <div class="row block right-block">
+                    <div class="row right-block">
                         <div class="article-category" v-for="v in article['category']">
                             <a href="" class="article-category-name">{{ v.name }}</a>
-                            <div class="article-category-info">{{ v.num }} 个文章, {{ v.like_num }} 次赞同</div>
+                            <div class="article-category-info">{{ v.num }} 篇文章, {{ v.like_num }} 人关注</div>
                         </div>
                     </div>
 
+                    <div class="row right-block">
+                        <div class="right-label-title ad">
+                            广告预留
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <div id="footer" class="container-fluid">
+        <div class="container">
+            <div class="row" id="footer-info">
+                <div class="footer-block col col-lg-3">
+                    <p>新手入门</p>
+                    <p>如何搜索</p>
+                    <p>如何注册</p>
+                    <p>关于积分</p>
+                    <p>成为大V</p>
+                </div>
+                <div class="footer-block col col-lg-3">
+                    <p>咨询帮助</p>
+                    <p>帮助中心</p>
+                    <p>常见问题</p>
+                    <p>联系客服</p>
+                    <p>意见反馈</p>
+                </div>
+                <div class="footer-block col col-lg-3">
+                    <p>联系我们</p>
+                    <p>客服QQ:2652525544</p>
+                    <p>邮箱:2652525544@qq.com</p>
+                    <p>工作时间（9:00-20:00）</p>
+                </div>
+                <div class="footer-block col col-lg-3">
+                    <img style="width: 150px" src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3171009071,1187259478&fm=111&gp=0.jpg">
+                </div>
+            </div>
+            <div class="row" id="icp">
+                Copyright © 2011-2018 BBS. 当前呈现版本 0.0.1 浙ICP备 15005796号-2   浙公网安备 33010602002000号
+            </div>
+        </div>
+    </div>
 </div>
-
 </body>
 </html>
