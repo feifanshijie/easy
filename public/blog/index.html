@@ -30,6 +30,7 @@
             <a class="header-nav-link" href="#">话题</a>
             <a class="header-nav-link" href="#">社群</a>
             <a class="header-nav-link" href="#">求助</a>
+            <a class="header-nav-link" href="#">关于</a>
         </div>
     </div>
     <div class="container">
@@ -39,7 +40,7 @@
                     <div class="row article-item" v-for="v in article['list']">
                         <div class="col col-lg-7">
                             <a href="javascript:;" v-on:click="brew()" class="article-name">{{ v.title }}</a>
-                            <div class="article-statistics"> • {{ v.follow_num }} 人觉得很赞 • {{ v.reply_num }} 个回复 • {{v.pv}} 次浏览 • 13 小时前 </div>
+                            <div class="article-statistics"> {{ v.follow_num }} 人觉得很赞 • {{ v.reply_num }} 个回复 • {{v.pv}} 次浏览 • 13 小时前 </div>
                         </div>
                         <div class="col col-lg-3">
                             <span v-for="(item, key) in v.label" :class="setLabel(key)">{{ item.name }}</span>
@@ -137,7 +138,7 @@
                 </div>
             </div>
             <div class="row" id="icp">
-                Copyright © 2011-2018 BBS. 当前呈现版本 0.0.1 浙ICP备 15005796号-2   浙公网安备 33010602002000号
+                <div style="margin: auto">Copyright © 2011-2018 9977我的树洞. 当前呈现版本 0.0.1 <a href="http://www.miitbeian.gov.cn">粤ICP备18042937号-1</a></div>
             </div>
         </div>
     </div>

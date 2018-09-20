@@ -22,7 +22,8 @@
 }
 
 #icp{
-    padding: 20px 0;
-    text-align: center;
-    background-color: red;
+    padding: 20px 0 10px 0;
+}
+#icp a{
+    color:#fff
 }
